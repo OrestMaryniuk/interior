@@ -5,22 +5,23 @@ import { motion } from "framer-motion";
 import { ProjectModal } from "@/components/ProjectModal";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import Image from "next/image";
 
 const projects = [
   {
     title: "Modern Loft",
     category: "Residential",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2653&auto=format&fit=crop",
+    image: "/loft.webp",
   },
   {
     title: "Minimalist Villa",
     category: "Residential",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop",
+    image: "/villa.webp",
   },
   {
     title: "Tech Office",
     category: "Commercial",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2301&auto=format&fit=crop",
+    image: "/office.webp",
   },
 ];
 
@@ -42,7 +43,9 @@ export function Portfolio() {
               <h2 className="text-xl md:text-4xl md:text-5xl font-heading font-bold mb-2 text-theme-primary">
                 {t.portfolio.title}
               </h2>
-              <p className="text-sm md:text-base text-theme-secondary">{t.portfolio.subtitle}</p>
+              <p className="text-sm md:text-base text-theme-secondary">
+                {t.portfolio.subtitle}
+              </p>
             </div>
             <button
               onClick={() => setIsModalOpen(true)}
@@ -61,14 +64,19 @@ export function Portfolio() {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className="relative group overflow-hidden rounded-2xl cursor-pointer"
               >
-                <img
+                <Image
                   src={project.image}
                   alt={project.title}
+                  fill
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                  <span className="text-sm text-neutral-300 mb-2">{project.category}</span>
-                  <h3 className="text-2xl font-heading font-bold text-white">{project.title}</h3>
+                  <span className="text-sm text-neutral-300 mb-2">
+                    {project.category}
+                  </span>
+                  <h3 className="text-2xl font-heading font-bold text-white">
+                    {project.title}
+                  </h3>
                 </div>
               </motion.div>
             ))}
@@ -84,7 +92,10 @@ export function Portfolio() {
         </div>
       </Section>
 
-      <ProjectModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ProjectModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </>
   );
 }

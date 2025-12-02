@@ -33,46 +33,58 @@ export function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
       id: 1,
       titleKey: "modernLoft",
       category: t.portfolio.residential,
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2653&auto=format&fit=crop",
+      image: "/loft.webp",
       descriptionKey: "modernLoft",
       details: {
         clientKey: "modernLoft",
         year: "2023",
         area: "2,500 sq ft",
-        services: [t.services.residential.title, t.footer.spacePlanning, "Custom Furniture"],
+        services: [
+          t.services.residential.title,
+          t.footer.spacePlanning,
+          "Custom Furniture",
+        ],
       },
     },
     {
       id: 2,
       titleKey: "minimalistVilla",
       category: t.portfolio.residential,
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop",
+      image: "/villa.webp",
       descriptionKey: "minimalistVilla",
       details: {
         clientKey: "minimalistVilla",
         year: "2023",
         area: "4,200 sq ft",
-        services: ["Full Interior Design", "Landscape Integration", "Lighting Design"],
+        services: [
+          "Full Interior Design",
+          "Landscape Integration",
+          "Lighting Design",
+        ],
       },
     },
     {
       id: 3,
       titleKey: "techOffice",
       category: t.portfolio.commercial,
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2301&auto=format&fit=crop",
+      image: "/office.webp",
       descriptionKey: "techOffice",
       details: {
         clientKey: "techOffice",
         year: "2024",
         area: "8,000 sq ft",
-        services: ["Office Design", "Branding Integration", "Acoustic Solutions"],
+        services: [
+          "Office Design",
+          "Branding Integration",
+          "Acoustic Solutions",
+        ],
       },
     },
     {
       id: 4,
       titleKey: "coastalRetreat",
       category: t.portfolio.residential,
-      image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2670&auto=format&fit=crop",
+      image: "/coast.webp",
       descriptionKey: "coastalRetreat",
       details: {
         clientKey: "coastalRetreat",
@@ -85,26 +97,34 @@ export function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
       id: 5,
       titleKey: "urbanPenthouse",
       category: t.portfolio.residential,
-      image: "https://images.unsplash.com/photo-1600607687644-c7171b42498b?q=80&w=2670&auto=format&fit=crop",
+      image: "/urban.webp",
       descriptionKey: "urbanPenthouse",
       details: {
         clientKey: "urbanPenthouse",
         year: "2024",
         area: "5,500 sq ft",
-        services: ["Interior Design", "Smart Home Integration", "Custom Furniture"],
+        services: [
+          "Interior Design",
+          "Smart Home Integration",
+          "Custom Furniture",
+        ],
       },
     },
     {
       id: 6,
       titleKey: "boutiqueHotel",
       category: t.portfolio.commercial,
-      image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=2670&auto=format&fit=crop",
+      image: "/hotel.webp",
       descriptionKey: "boutiqueHotel",
       details: {
         clientKey: "boutiqueHotel",
         year: "2023",
         area: "12,000 sq ft",
-        services: ["Full Interior Design", "FF&E Procurement", "Brand Experience"],
+        services: [
+          "Full Interior Design",
+          "FF&E Procurement",
+          "Brand Experience",
+        ],
       },
     },
   ];
@@ -167,8 +187,12 @@ export function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-100 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-                          <span className="text-sm text-neutral-300 mb-2">{project.category}</span>
-                          <h3 className="text-2xl font-heading font-bold text-white">{t.projects[project.titleKey].title}</h3>
+                          <span className="text-sm text-neutral-300 mb-2">
+                            {project.category}
+                          </span>
+                          <h3 className="text-2xl font-heading font-bold text-white">
+                            {t.projects[project.titleKey].title}
+                          </h3>
                         </div>
                       </motion.div>
                     ))}
@@ -185,8 +209,18 @@ export function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
                     onClick={handleBack}
                     className="mb-6 text-theme-secondary hover:text-theme-primary transition-colors flex items-center gap-2"
                   >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 19l-7-7 7-7"
+                      />
                     </svg>
                     {t.portfolio.backToGallery}
                   </button>
@@ -215,28 +249,47 @@ export function ProjectModal({ isOpen, onClose }: ProjectModalProps) {
 
                       <div className="space-y-6">
                         <div>
-                          <h4 className="text-sm font-medium text-theme-accent mb-2">{t.portfolio.client}</h4>
-                          <p className="text-theme-primary">{t.projects[selectedProject.details.clientKey].client}</p>
+                          <h4 className="text-sm font-medium text-theme-accent mb-2">
+                            {t.portfolio.client}
+                          </h4>
+                          <p className="text-theme-primary">
+                            {
+                              t.projects[selectedProject.details.clientKey]
+                                .client
+                            }
+                          </p>
                         </div>
                         <div>
-                          <h4 className="text-sm font-medium text-theme-accent mb-2">{t.portfolio.year}</h4>
-                          <p className="text-theme-primary">{selectedProject.details.year}</p>
+                          <h4 className="text-sm font-medium text-theme-accent mb-2">
+                            {t.portfolio.year}
+                          </h4>
+                          <p className="text-theme-primary">
+                            {selectedProject.details.year}
+                          </p>
                         </div>
                         <div>
-                          <h4 className="text-sm font-medium text-theme-accent mb-2">{t.portfolio.area}</h4>
-                          <p className="text-theme-primary">{selectedProject.details.area}</p>
+                          <h4 className="text-sm font-medium text-theme-accent mb-2">
+                            {t.portfolio.area}
+                          </h4>
+                          <p className="text-theme-primary">
+                            {selectedProject.details.area}
+                          </p>
                         </div>
                         <div>
-                          <h4 className="text-sm font-medium text-theme-accent mb-2">{t.portfolio.services}</h4>
+                          <h4 className="text-sm font-medium text-theme-accent mb-2">
+                            {t.portfolio.services}
+                          </h4>
                           <div className="flex flex-wrap gap-2">
-                            {selectedProject.details.services.map((service, index) => (
-                              <span
-                                key={index}
-                                className="px-3 py-1 bg-black/5 dark:bg-white/5 border border-neutral-300 dark:border-white/10 rounded-full text-sm text-theme-secondary"
-                              >
-                                {service}
-                              </span>
-                            ))}
+                            {selectedProject.details.services.map(
+                              (service, index) => (
+                                <span
+                                  key={index}
+                                  className="px-3 py-1 bg-black/5 dark:bg-white/5 border border-neutral-300 dark:border-white/10 rounded-full text-sm text-theme-secondary"
+                                >
+                                  {service}
+                                </span>
+                              )
+                            )}
                           </div>
                         </div>
                       </div>

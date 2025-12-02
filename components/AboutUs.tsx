@@ -3,6 +3,7 @@
 import { Section } from "@/components/ui/Section";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
+import Image from "next/image";
 
 export function AboutUs() {
   const { t } = useLanguage();
@@ -31,16 +32,28 @@ export function AboutUs() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 mt-6 md:mt-12">
               <div>
-                <h3 className="text-lg md:text-4xl font-heading font-bold text-theme-primary">50+</h3>
-                <p className="text-xs md:text-sm text-theme-accent mt-2">{t.about.projects}</p>
+                <h3 className="text-lg md:text-4xl font-heading font-bold text-theme-primary">
+                  50+
+                </h3>
+                <p className="text-xs md:text-sm text-theme-accent mt-2">
+                  {t.about.projects}
+                </p>
               </div>
               <div>
-                <h3 className="text-lg md:text-4xl font-heading font-bold text-theme-primary">15+</h3>
-                <p className="text-xs md:text-sm text-theme-accent mt-2">{t.about.awards}</p>
+                <h3 className="text-lg md:text-4xl font-heading font-bold text-theme-primary">
+                  15+
+                </h3>
+                <p className="text-xs md:text-sm text-theme-accent mt-2">
+                  {t.about.awards}
+                </p>
               </div>
               <div>
-                <h3 className="text-lg md:text-4xl font-heading font-bold text-theme-primary">100%</h3>
-                <p className="text-xs md:text-sm text-theme-accent mt-2">{t.about.satisfaction}</p>
+                <h3 className="text-lg md:text-4xl font-heading font-bold text-theme-primary">
+                  100%
+                </h3>
+                <p className="text-xs md:text-sm text-theme-accent mt-2">
+                  {t.about.satisfaction}
+                </p>
               </div>
             </div>
           </motion.div>
@@ -53,9 +66,10 @@ export function AboutUs() {
             className="relative"
           >
             <div className="relative aspect-[5/3] lg:aspect-square rounded-3xl overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2600&auto=format&fit=crop"
-                alt="About Us"
+              <Image
+                src="/schema.webp"
+                alt="interior design sketch"
+                fill
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
