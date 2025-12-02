@@ -1,16 +1,17 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, handleScroll } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { Leaf, X } from "lucide-react";
-import Link from "next/link";
+import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { SettingsMenu } from "@/components/SettingsMenu";
 import { MobileSettings } from "@/components/MobileSettings";
 import { useLanguage } from "@/contexts/LanguageContext";
+import Logo from "@/public/logo.svg";
+import { useActiveSection } from "@/contexts/ActiveSectionContext";
 
 export function Navbar() {
-  const [activeSection, setActiveSection] = useState("hero");
+  const { activeSection, setActiveSection } = useActiveSection();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { t } = useLanguage();
 
@@ -58,50 +59,48 @@ export function Navbar() {
     };
   }, [navItems]);
 
-  const handleMobileLinkClick = () => {
-    setIsMobileMenuOpen(false);
-  };
-
   return (
     <>
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 md:px-12"
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-3 sm:px-12"
       >
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <Leaf className="h-8 w-8 text-theme-primary" />
-          <span className="text-2xl font-heading font-bold text-theme-primary">
+          <Logo className="w-4 sm:w-6 md:w-10 fill-theme-primary" />
+          <span className="text-sm sm:text-xl md:text-2xl font-heading font-bold text-theme-primary">
             Interior Lab
           </span>
         </div>
 
         {/* Center Nav (Desktop) */}
-        <div className="hidden lg:flex items-center gap-1 bg-white/30 dark:bg-black/30 backdrop-blur-md px-2 py-1.5 rounded-full border border-black/10 dark:border-white/10">
+        <div className="hidden xl:flex items-center gap-1 bg-white/30 dark:bg-black/30 backdrop-blur-md px-2 py-1.5 rounded-full border border-black/10 dark:border-white/10">
           {navItems.map((item) => (
-            <Link
+            <a
               key={item.name}
               href={item.href}
+              onClick={(e) => handleScroll(e, item.href, setActiveSection)}
               className={cn(
-                "px-4 py-2 text-sm font-medium rounded-full transition-all capitalize",
+                "px-4 py-2 text-sm font-medium rounded-full transition-all capitalize cursor-pointer",
                 activeSection === item.href.substring(1)
                   ? "bg-black text-white dark:bg-white dark:text-black"
                   : "text-neutral-700 hover:text-black dark:text-neutral-300 dark:hover:text-white hover:bg-white/10"
               )}
             >
               {item.name}
-            </Link>
+            </a>
           ))}
         </div>
 
         {/* Right Side Controls */}
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden xl:flex items-center gap-3">
           <SettingsMenu />
           <a
             href="#contact"
-            className="bg-black text-white dark:bg-white dark:text-black px-6 py-2.5 rounded-full font-medium hover:opacity-80 transition-opacity"
+            onClick={(e) => handleScroll(e, "#contact", setActiveSection)}
+            className="bg-black text-white dark:bg-white dark:text-black px-6 py-2.5 rounded-full font-medium hover:opacity-80 transition-opacity cursor-pointer"
           >
             {t.nav.cta}
           </a>
@@ -110,7 +109,7 @@ export function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="lg:hidden text-theme-primary z-50 relative"
+          className="xl:hidden text-theme-primary z-50 relative "
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? (
@@ -141,9 +140,9 @@ export function Navbar() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            className="fixed inset-y-0 right-0 z-40 w-full bg-white/95 dark:bg-black/95 backdrop-blur-lg lg:hidden"
+            className="fixed inset-y-0 right-0 z-40 w-full bg-white/95 dark:bg-black/95 backdrop-blur-lg xl:hidden"
           >
-            <div className="flex flex-col items-center justify-center h-full gap-8 px-6">
+            <div className="flex flex-col items-center justify-center md:h-full gap-4 md:gap-8 px-6 mt-12 sm:mt-0">
               {navItems.map((item, index) => (
                 <motion.div
                   key={item.name}
@@ -151,21 +150,24 @@ export function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Link
+                  <a
                     href={item.href}
-                    onClick={handleMobileLinkClick}
+                    onClick={(e) => {
+                      handleScroll(e, item.href, setActiveSection);
+                      setIsMobileMenuOpen(false);
+                    }}
                     className={cn(
-                      "text-3xl font-heading font-bold capitalize transition-colors",
+                      "text-lg md:text-3xl font-heading font-bold capitalize transition-colors cursor-pointer",
                       activeSection === item.href.substring(1)
                         ? "text-black dark:text-white"
                         : "text-neutral-600 hover:text-black dark:text-neutral-400 dark:hover:text-white"
                     )}
                   >
                     {item.name}
-                  </Link>
+                  </a>
                 </motion.div>
               ))}
-              
+
               {/* Mobile Settings */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -173,16 +175,19 @@ export function Navbar() {
                 transition={{ delay: navItems.length * 0.1 }}
                 className="mt-4 space-y-4 w-full max-w-xs"
               >
-                <MobileSettings onClose={handleMobileLinkClick} />
+                <MobileSettings onClose={() => setIsMobileMenuOpen(false)} />
               </motion.div>
 
               <motion.a
                 href="#contact"
-                onClick={handleMobileLinkClick}
+                onClick={(e) => {
+                  handleScroll(e, "#contact", setActiveSection);
+                  setIsMobileMenuOpen(false);
+                }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: (navItems.length + 1) * 0.1 }}
-                className="bg-black text-white dark:bg-white dark:text-black px-8 py-4 rounded-full font-bold hover:opacity-80 transition-opacity"
+                className="bg-black text-white dark:bg-white dark:text-black px-8 py-4 rounded-full font-bold hover:opacity-80 transition-opacity cursor-pointer"
               >
                 {t.nav.cta}
               </motion.a>

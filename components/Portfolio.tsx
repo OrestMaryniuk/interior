@@ -39,10 +39,10 @@ export function Portfolio() {
             className="flex justify-between items-end mb-12"
           >
             <div>
-              <h2 className="text-4xl md:text-5xl font-heading font-bold mb-2 text-theme-primary">
+              <h2 className="text-xl md:text-4xl md:text-5xl font-heading font-bold mb-2 text-theme-primary">
                 {t.portfolio.title}
               </h2>
-              <p className="text-theme-secondary">{t.portfolio.subtitle}</p>
+              <p className="text-sm md:text-base text-theme-secondary">{t.portfolio.subtitle}</p>
             </div>
             <button
               onClick={() => setIsModalOpen(true)}
@@ -77,7 +77,7 @@ export function Portfolio() {
           {/* Mobile View All Button */}
           <button
             onClick={() => setIsModalOpen(true)}
-            className="md:hidden mt-8 text-theme-primary border border-neutral-400 dark:border-white/30 px-6 py-3 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors mx-auto"
+            className="md:hidden mt-4 text-theme-primary border border-neutral-400 dark:border-white/30 px-4 py-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors mx-auto"
           >
             {t.portfolio.viewAll}
           </button>

@@ -62,4 +62,9 @@
   .text-theme-accent {
     @apply text-neutral-400 dark:text-neutral-500;
   }
+
+  /* Theme-aware SVG */
+  .fill-theme-primary {
+    @apply fill-black dark:fill-white;
+  }
 }

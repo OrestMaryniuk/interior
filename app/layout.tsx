@@ -4,23 +4,33 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { ActiveSectionProvider } from "@/contexts/ActiveSectionContext";
 
-const inter = Inter({ 
-  subsets: ["latin"], 
+const inter = Inter({
+  subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
 });
 
-const outfit = Outfit({ 
-  subsets: ["latin"], 
+const outfit = Outfit({
+  subsets: ["latin"],
   variable: "--font-outfit",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Interior Lab | Premium Interior Design Studio",
-  description: "Award-winning interior design studio specializing in residential and commercial spaces. We create interiors you'll love living in. Design that blends aesthetics and functionality.",
-  keywords: ["interior design", "residential design", "commercial design", "space planning", "interior designer", "home design", "office design"],
+  description:
+    "Award-winning interior design studio specializing in residential and commercial spaces. We create interiors you'll love living in. Design that blends aesthetics and functionality.",
+  keywords: [
+    "interior design",
+    "residential design",
+    "commercial design",
+    "space planning",
+    "interior designer",
+    "home design",
+    "office design",
+  ],
   authors: [{ name: "Interior Lab" }],
   creator: "Interior Lab",
   publisher: "Interior Lab",
@@ -28,9 +38,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
     languages: {
-      "en": "/",
-      "uk": "/",
-      "de": "/",
+      en: "/",
+      uk: "/",
+      de: "/",
     },
   },
   openGraph: {
@@ -39,7 +49,8 @@ export const metadata: Metadata = {
     alternateLocale: ["uk_UA", "de_DE"],
     url: "https://interiorlab.com",
     title: "Interior Lab | Premium Interior Design Studio",
-    description: "Award-winning interior design studio specializing in residential and commercial spaces. Transform your space with our expert designers.",
+    description:
+      "Award-winning interior design studio specializing in residential and commercial spaces. Transform your space with our expert designers.",
     siteName: "Interior Lab",
     images: [
       {
@@ -53,7 +64,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Interior Lab | Premium Interior Design Studio",
-    description: "Award-winning interior design studio. We create interiors you'll love living in.",
+    description:
+      "Award-winning interior design studio. We create interiors you'll love living in.",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -93,7 +105,7 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <LanguageProvider>
-            {children}
+            <ActiveSectionProvider>{children}</ActiveSectionProvider>
           </LanguageProvider>
         </ThemeProvider>
       </body>
