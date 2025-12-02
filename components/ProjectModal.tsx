@@ -4,15 +4,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/lib/translations";
+
+type ProjectKey = keyof typeof translations.en.projects;
 
 interface Project {
   id: number;
-  titleKey: string;
+  titleKey: ProjectKey;
   category: string;
   image: string;
-  descriptionKey: string;
+  descriptionKey: ProjectKey;
   details: {
-    clientKey: string;
+    clientKey: ProjectKey;
     year: string;
     area: string;
     services: string[];
